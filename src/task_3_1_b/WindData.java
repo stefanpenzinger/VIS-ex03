@@ -14,16 +14,16 @@ public class WindData {
         return mSpeed;
     }
 
-    public void setmSpeed(String mSpeed) {
-        this.mSpeed = mSpeed;
+    public void setmSpeed(String _mSpeed) {
+        this.mSpeed = _mSpeed;
     }
 
     public String getmDeg() {
         return mDeg;
     }
 
-    public void setmDeg(String mDeg) {
-        this.mDeg = mDeg;
+    public void setmDeg(String _mDeg) {
+        this.mDeg = _mDeg;
     }
 
     @Override

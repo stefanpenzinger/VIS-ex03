@@ -6,7 +6,7 @@ import java.io.*;
  * A simple class to extract information of the xml file and place it in the corresponding container
  */
 public class DontDoItLikeThat {
-    public static void main(String[] args) {
+    public static void main(String[] _args) {
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\task_3_1_a\\WGS.xml"));
             StringBuilder sb = new StringBuilder();
