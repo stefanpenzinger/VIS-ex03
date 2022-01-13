@@ -1,4 +1,4 @@
-package task_3_1_b;
+package at.fh.hagenberg.mc.vis.task3_1.b;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;

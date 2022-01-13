@@ -1,4 +1,4 @@
-package task_3_1_b;
+package at.fh.hagenberg.mc.vis.task3_1.b;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

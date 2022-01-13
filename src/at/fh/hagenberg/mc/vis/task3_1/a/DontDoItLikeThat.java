@@ -1,4 +1,4 @@
-package task_3_1_a;
+package at.fh.hagenberg.mc.vis.task3_1.a;
 
 import java.io.*;
 

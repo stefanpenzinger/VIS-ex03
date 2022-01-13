@@ -1,4 +1,4 @@
-package task_3_1_c;
+package at.fh.hagenberg.mc.vis.task3_1.c;
 
 import javax.xml.bind.*;
 import java.io.StringReader;
