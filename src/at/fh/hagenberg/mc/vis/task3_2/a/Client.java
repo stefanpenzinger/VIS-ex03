@@ -7,9 +7,12 @@ import javax.xml.ws.Service;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * Task 3.2a
+ * Client Implementation
+ */
 public class Client {
     public static void main(String[] args) {
-
         try {
             /*
 

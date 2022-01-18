@@ -5,9 +5,18 @@ import javax.jws.WebService;
 
 @WebService
 public interface IHelloWorld {
+    /**
+     * Returns Hello World
+     * @return String
+     */
     @WebMethod
-    public String saySomething();
+    String saySomething();
 
+    /**
+     * Returns a new dummy with the given name
+     * @param _name String
+     * @return DummyData
+     */
     @WebMethod
-    public DummyData getData(String _name);
+    DummyData getData(String _name);
 }

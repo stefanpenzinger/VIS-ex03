@@ -4,8 +4,10 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 
+/**
+ * Task 3.1b
+ */
 public class Main {
-
     public static void main(String[] _args) {
         try {
             SAXParserFactory spf = SAXParserFactory.newInstance();

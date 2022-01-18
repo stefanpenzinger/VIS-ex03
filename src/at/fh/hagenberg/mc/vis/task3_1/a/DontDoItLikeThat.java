@@ -3,6 +3,7 @@ package at.fh.hagenberg.mc.vis.task3_1.a;
 import java.io.*;
 
 /**
+ * Task 3.1a
  * A simple class to extract information of the xml file and place it in the corresponding container
  */
 public class DontDoItLikeThat {

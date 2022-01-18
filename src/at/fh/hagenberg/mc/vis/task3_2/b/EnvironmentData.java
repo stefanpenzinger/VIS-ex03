@@ -1,92 +1,73 @@
 package at.fh.hagenberg.mc.vis.task3_2.b;
 
-import at.fh.hagenberg.mc.vis.task3_1.c.Pet;
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 import org.eclipse.persistence.oxm.MediaType;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.xml.bind.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 @WebService(endpointInterface = "at.fh.hagenberg.mc.vis.task3_2.b.IEnvironmentData")
 public class EnvironmentData implements IEnvironmentData {
-    @Override
-    @WebMethod
-    public Locations requestEnvironmentDataTypes() {
-        return Locations.Wien;
+    /**
+     * Api key to get weather data
+     * @val String
+     */
+    private String mApiKey;
+
+    /**
+     * Constructor of EnvironmentData
+     */
+    public EnvironmentData() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/at/fh/hagenberg/mc/vis/task3_2/b/api.txt"));
+
+            this.mApiKey = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Returns the available Locations
+     *
+     * @return Locations
+     */
     @Override
     @WebMethod
-    public EnvData requestWeatherData() {
+    public Locations[] requestEnvironmentDataTypes() {
+        return Locations.values();
+    }
+
+    /**
+     * Returns the weather data in form of EnvData Container
+     *
+     * @param _location Location to get the weather data from
+     * @return EnvData Object or null in case of error
+     */
+    @Override
+    @WebMethod
+    public EnvData requestWeatherData(Locations _location) {
         try {
             System.setProperty("javax.xml.bind.context.factory","org.eclipse.persistence.jaxb.JAXBContextFactory");
 
-            //String content = getContent();
-            String content = " {" +
-                    "   \"message\":\"accurate\"," +
-                    "   \"cod\":\"200\"," +
-                    "   \"count\":1," +
-                    "   \"list\":[" +
-                    "      {" +
-                    "         \"id\":2643743," +
-                    "         \"name\":\"London\"," +
-                    "         \"coord\":{" +
-                    "            \"lat\":51.5085," +
-                    "            \"lon\":-0.1258" +
-                    "         }," +
-                    "         \"main\":{" +
-                    "            \"temp\":7," +
-                    "            \"pressure\":1012," +
-                    "            \"humidity\":81," +
-                    "            \"temp_min\":5," +
-                    "            \"temp_max\":8" +
-                    "         }," +
-                    "         \"dt\":1485791400," +
-                    "         \"wind\":{" +
-                    "            \"speed\":4.6," +
-                    "            \"deg\":90" +
-                    "         }," +
-                    "         \"sys\":{" +
-                    "            \"country\":\"GB\"" +
-                    "         }," +
-                    "         \"rain\":null," +
-                    "         \"snow\":null," +
-                    "         \"clouds\":{" +
-                    "            \"all\":90" +
-                    "         }," +
-                    "         \"weather\":[" +
-                    "            {" +
-                    "               \"id\":701," +
-                    "               \"main\":\"Mist\"," +
-                    "               \"description\":\"mist\"," +
-                    "               \"icon\":\"50d\"" +
-                    "            }," +
-                    "            {" +
-                    "               \"id\":300," +
-                    "               \"main\":\"Drizzle\"," +
-                    "               \"description\":\"light intensity drizzle\"," +
-                    "               \"icon\":\"09d\"" +
-                    "            }" +
-                    "         ]" +
-                    "      }" +
-                    "   ]" +
-                    "  }";
+            String content = getContent(_location);
+            //String content = "{\"coord\":{\"lon\":16.3721,\"lat\":48.2085},\"weather\":[{\"id\":801,\"main\":\"Clouds\",\"description\":\"few clouds\",\"icon\":\"02d\"}],\"base\":\"stations\",\"main\":{\"temp\":4.88,\"feels_like\":4.88,\"temp_min\":3.21,\"temp_max\":6.56,\"pressure\":1035,\"humidity\":61},\"visibility\":10000,\"wind\":{\"speed\":0.45,\"deg\":350,\"gust\":3.58},\"clouds\":{\"all\":20},\"dt\":1642508532,\"sys\":{\"type\":2,\"id\":2037452,\"country\":\"AT\",\"sunrise\":1642487884,\"sunset\":1642519875},\"timezone\":3600,\"id\":2761369,\"name\":\"Vienna\",\"cod\":200}\n";
 
 
             JSONObject jsonObject = new JSONObject(content);
-            jsonObject = jsonObject.getJSONArray("list").getJSONObject(0).getJSONObject("main");
+            jsonObject = jsonObject.getJSONObject("main");
 
             //EnvData envDataTest = new EnvData(jsonObject.getFloat("temp"), jsonObject.getFloat("pressure"),jsonObject.getFloat("humidity"),jsonObject.getFloat("temp_min"),jsonObject.getFloat("temp_max"));
 
@@ -110,8 +91,15 @@ public class EnvironmentData implements IEnvironmentData {
         }
     }
 
-    private String getContent() throws IOException {
-        URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=Wien,at&units=metric&APPID=15700b057d281f860821612c91035931");
+    /**
+     * Returns the json data from the api call
+     *
+     * @param _location Location to get the weather data from
+     * @return JSON String
+     * @throws IOException if something fails
+     */
+    private String getContent(Locations _location) throws IOException {
+        URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + _location + ",at&units=metric&APPID=" + mApiKey);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
 
         int length = http.getContentLength();

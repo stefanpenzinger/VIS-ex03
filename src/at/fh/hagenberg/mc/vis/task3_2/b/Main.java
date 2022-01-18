@@ -1,6 +1,10 @@
 package at.fh.hagenberg.mc.vis.task3_2.b;
 
 import javax.xml.ws.Endpoint;
+
+/**
+ * Task 3.2b Server Implementation
+ */
 public class Main {
     public static void main(String[] args) {
         EnvironmentData test = new EnvironmentData();
