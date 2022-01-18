@@ -7,7 +7,15 @@ package at.fh.hagenberg.mc.vis.task3_1.b;
  * mDeg = degree of wind
  */
 public class WindData {
+    /**
+     * Wind speed
+     * @val String
+     */
     private String mSpeed;
+    /**
+     * Degree
+     * @val String
+     */
     private String mDeg;
 
     /**
