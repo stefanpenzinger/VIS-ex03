@@ -12,7 +12,7 @@ import java.net.URL;
  * Client Implementation
  */
 public class Client {
-    public static void main(String[] args) {
+    public static void main(String[] _args) {
         try {
             /*
 
@@ -39,7 +39,7 @@ public class Client {
                             new QName("http://a.task3_2.vis.mc.hagenberg.fh.at/",
                                     "HelloWorldService"));
 
-            at.fh.hagenberg.mc.vis.task3_2.a.client.HelloWorld mSoap = service.getPort(at.fh.hagenberg.mc.vis.task3_2.a.client.HelloWorld.class);
+            at.fh.hagenberg.mc.vis.task3_2.a.client.IHelloWorld mSoap = service.getPort(at.fh.hagenberg.mc.vis.task3_2.a.client.IHelloWorld.class);
 
             System.out.println(mSoap.saySomething());
             System.out.println(mSoap.getData("LOL"));

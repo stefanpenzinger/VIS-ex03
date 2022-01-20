@@ -17,7 +17,7 @@ import java.util.Date;
  * Parametrized Unmarshaller in order to parse JSON to Data Container
  */
 public class ParametrizedUnmarshaller {
-    public static void main(String[] args) {
+    public static void main(String[] _args) {
         try {
             System.setProperty("javax.xml.bind.context.factory","org.eclipse.persistence.jaxb.JAXBContextFactory");
 

@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Task 3.2b Client Implementation
  */
 public class Client {
-    public static void main(String[] args) {
+    public static void main(String[] _args) {
 
         try {
             /*
