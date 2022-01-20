@@ -41,11 +41,18 @@ public class Sensor {
         this.mType = mType;
 
         if (mType == Type.temperature) {
-            this.mValue = -10 + new Random().nextFloat() * (40 + 10);
+            this.mValue = 25.2f;
         }
         else if (mType == Type.humidity) {
             this.mValue = new Random().nextFloat() * 100;
         }
+    }
 
+    /**
+     * Sets the value of the sensor
+     * @param _value float
+     */
+    public void setValue(float _value) {
+        this.mValue = _value;
     }
 }
