@@ -12,6 +12,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+/**
+ * Task 3.1d
+ * Parametrized Unmarshaller in order to parse JSON to Data Container
+ */
 public class ParametrizedUnmarshaller {
     public static void main(String[] args) {
         try {

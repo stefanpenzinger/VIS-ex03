@@ -1,2 +1,4 @@
 /.idea/
 /out/
+/WEB-INF/classes/
+/WEB-INF/lib/

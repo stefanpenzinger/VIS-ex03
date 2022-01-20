@@ -1,6 +1,10 @@
 package at.fh.hagenberg.mc.vis.task3_2.a;
 
 import javax.xml.ws.Endpoint;
+
+/**
+ * Task 3.2a - Server Implementation
+ */
 public class Main {
     public static void main(String[] args) {
         HelloWorld test = new HelloWorld();

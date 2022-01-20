@@ -10,20 +10,47 @@ import java.util.Date;
 @XmlRootElement
 @XmlType(propOrder = { "mName", "mType", "mID", "mBirthday", "mVaccinations" })
 public class Pet {
+    /**
+     * Supported type of pets
+     */
     @XmlType
-    public enum Type { cat, dog, mouse, bird };
+    public enum Type { cat, dog, mouse, bird }
 
+    /**
+     * Name of the pet
+     * @val String mName
+     */
     @XmlElement(name = "name")
     private String mName;
+    /**
+     * Nickname of the pet
+     * @val String mNickname
+     */
     @XmlAttribute(name = "nickname")
     private String mNickName;
+    /**
+     * Birthday of the pet
+     * @val Date mBirthday
+     */
     @XmlElement(name = "birthday")
     private Date mBirthday;
+    /**
+     * Type of the pet
+     * @val Type mType
+     */
     @XmlElement(name = "type", namespace = "pet type")
     private Type mType;
+    /**
+     * Vaccinations the pet has
+     * @val String[] mVaccinations
+     */
     @XmlElementWrapper(name = "vaccinations")
     @XmlElement(name = "vaccination")
     private String[] mVaccinations;
+    /**
+     * ID of the pet
+     * @val String mID
+     */
     @XmlElement(name = "id")
     private String mID;
 
