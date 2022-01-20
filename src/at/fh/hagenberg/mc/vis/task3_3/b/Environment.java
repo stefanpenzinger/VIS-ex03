@@ -1,12 +1,8 @@
 package at.fh.hagenberg.mc.vis.task3_3.b;
 
-import at.fh.hagenberg.mc.vis.task3_1.c.Pet;
-import org.eclipse.persistence.jaxb.UnmarshallerProperties;
+import org.json.JSONObject;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBContext;
@@ -67,7 +63,7 @@ public class Environment extends Application {
     @Path("/{sensor}")
     @Produces(MediaType.TEXT_XML)
     public String getSensors(@PathParam("sensor") String _sensor) {
-        return getXml(_sensor);
+        return getXml(_sensor, null);
     }
 
     /**
@@ -78,15 +74,16 @@ public class Environment extends Application {
     @Path("/ALL")
     @Produces(MediaType.TEXT_XML)
     public String getAllSensors() {
-        return getXml(null);
+        return getXml(null, null);
     }
 
     /**
      * Returns XML Representation of Sensors
      * @param _sensorName Sensor[]
+     * @param _temperature Float
      * @return String
      */
-    private String getXml(String _sensorName) {
+    private String getXml(String _sensorName, Float _temperature) {
         try {
             JAXBContext jc = JAXBContext.newInstance(new Class[] { SensorList.class, Sensor.class });
             Marshaller m = jc.createMarshaller();
@@ -96,6 +93,11 @@ public class Environment extends Application {
 
             if (_sensorName != null) {
                 Sensor sensor = new Sensor(Sensor.Type.valueOf(_sensorName));
+
+                if (_temperature != null) {
+                    sensor.setValue(_temperature);
+                }
+
                 m.marshal(sensor, sw);
             }
             else {
@@ -111,5 +113,20 @@ public class Environment extends Application {
             e.printStackTrace();
             return "<error><message>" + e.getMessage() + "</message></error>";
         }
+    }
+
+    /**
+     * Returns the updated sensor
+     * @param _content String
+     * @return String XML
+     */
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_XML)
+    public String updateTemperature(String _content) {
+        JSONObject jsonObject = new JSONObject(_content);
+        float temperature = jsonObject.getFloat("temperature");
+
+        return getXml("temperature", temperature);
     }
 }
